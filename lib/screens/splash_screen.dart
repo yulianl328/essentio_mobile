@@ -16,23 +16,28 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 2), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (_) => HomeScreen(subscription: widget.subscription),
-        ),
-      );
+
+    // FIX: навігація після рендера
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Timer(const Duration(seconds: 2), () {
+        if (!mounted) return;
+
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (_) => HomeScreen(subscription: widget.subscription),
+          ),
+        );
+      });
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
       body: Center(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
               'assets/splash.png',

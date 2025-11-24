@@ -102,7 +102,7 @@ class _BudgetScreenState extends State<BudgetScreen> {
               Theme.of(context).colorScheme.surface,
               Theme.of(context)
                   .colorScheme
-                  .surfaceVariant
+                  .surfaceContainerHighest
                   .withOpacity(0.4),
             ],
             begin: Alignment.topCenter,
